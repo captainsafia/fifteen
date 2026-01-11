@@ -7,7 +7,7 @@
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
-	onMount(async () => {
+	onMount(() => {
 		try {
 			const unsubscribe = convex.onUpdate(api.queries.listGames, {}, (newGames) => {
 				games = newGames;
@@ -116,7 +116,7 @@
 									</a>
 									<button
 										type="button"
-										on:click={() => deleteGame(game._id)}
+										onclick={() => deleteGame(game._id)}
 										class="text-red-600 hover:underline"
 									>
 										Delete

@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, MutationCtx } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 
 // Create a new game
@@ -11,7 +11,7 @@ export const createGame = mutation({
     startTime: v.number(),
     endTime: v.number(),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx: MutationCtx, args: any) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to create a game");
@@ -54,7 +54,7 @@ export const updateGame = mutation({
     startTime: v.optional(v.number()),
     endTime: v.optional(v.number()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx: MutationCtx, args: any) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to update a game");
@@ -111,7 +111,7 @@ export const deleteGame = mutation({
   args: {
     id: v.id("games"),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx: MutationCtx, args: any) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to delete a game");

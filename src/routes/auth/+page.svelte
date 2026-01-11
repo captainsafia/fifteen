@@ -16,12 +16,12 @@
 
 		try {
 			if (mode === 'signup') {
-				await convex.mutation(api.auth.signIn, {
+				await convex.action(api.auth.signIn, {
 					provider: 'password',
 					params: { email, password, name }
 				});
 			} else {
-				await convex.mutation(api.auth.signIn, {
+				await convex.action(api.auth.signIn, {
 					provider: 'password',
 					params: { email, password }
 				});
@@ -49,7 +49,7 @@
 			</div>
 		{/if}
 
-		<form on:submit|preventDefault={handleSubmit} class="space-y-4">
+		<form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="space-y-4">
 			{#if mode === 'signup'}
 				<div>
 					<label for="name" class="block text-sm font-medium text-gray-700 mb-1">
@@ -102,7 +102,7 @@
 		<div class="mt-6 text-center">
 			<button
 				type="button"
-				on:click={() => (mode = mode === 'signin' ? 'signup' : 'signin')}
+				onclick={() => (mode = mode === 'signin' ? 'signup' : 'signin')}
 				class="text-blue-600 hover:underline"
 			>
 				{mode === 'signin' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}

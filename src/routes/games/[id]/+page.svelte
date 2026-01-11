@@ -9,7 +9,7 @@
 	let error = $state<string | null>(null);
 	let gameId = $derived($page.params.id);
 
-	onMount(async () => {
+	onMount(() => {
 		try {
 			const unsubscribe = convex.onUpdate(
 				api.queries.getGame,
@@ -85,7 +85,7 @@
 					</a>
 					<button
 						type="button"
-						on:click={deleteGame}
+						onclick={deleteGame}
 						class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
 					>
 						Delete

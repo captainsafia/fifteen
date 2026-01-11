@@ -8,7 +8,7 @@
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
-	onMount(async () => {
+	onMount(() => {
 		try {
 			// Subscribe to games
 			const unsubscribeGames = convex.onUpdate(api.queries.listGames, {}, (newGames) => {

@@ -1,11 +1,11 @@
 import { v } from "convex/values";
-import { query } from "./_generated/server";
+import { query, QueryCtx } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 
 // List all games
 export const listGames = query({
   args: {},
-  handler: async (ctx) => {
+  handler: async (ctx: QueryCtx) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to view games");
@@ -17,7 +17,7 @@ export const listGames = query({
       .collect();
 
     // Add computed duration to each game
-    return games.map((game) => ({
+    return games.map((game: any) => ({
       ...game,
       duration: game.endTime - game.startTime,
     }));
@@ -29,7 +29,7 @@ export const getGame = query({
   args: {
     id: v.id("games"),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx: QueryCtx, args: any) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to view game");
@@ -50,7 +50,7 @@ export const getGame = query({
 // Get leaderboard with win counts
 export const getLeaderboard = query({
   args: {},
-  handler: async (ctx) => {
+  handler: async (ctx: QueryCtx) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
       throw new Error("Must be logged in to view leaderboard");

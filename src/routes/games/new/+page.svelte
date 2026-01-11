@@ -76,7 +76,7 @@
 		</div>
 	{/if}
 
-	<form on:submit|preventDefault={handleSubmit} class="bg-white rounded-lg shadow-md p-6 space-y-6">
+	<form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="bg-white rounded-lg shadow-md p-6 space-y-6">
 		<!-- Players -->
 		<div>
 			<div class="flex justify-between items-center mb-3">
@@ -84,7 +84,7 @@
 				{#if players.length < 4}
 					<button
 						type="button"
-						on:click={addPlayer}
+						onclick={addPlayer}
 						class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
 					>
 						Add Player
@@ -105,7 +105,7 @@
 						{#if players.length > 2}
 							<button
 								type="button"
-								on:click={() => removePlayer(i)}
+								onclick={() => removePlayer(i)}
 								class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
 							>
 								Remove
